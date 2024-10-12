@@ -27,7 +27,7 @@ SelfCrypt/
 ## 🛠️ **Installation & Setup**
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/YOUR-USERNAME/SelfCrypt.git
+   git clone https://github.com/relgcy/SelfCrypt.git
    cd SelfCrypt
    ```
 
