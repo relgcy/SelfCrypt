@@ -5,7 +5,21 @@ from backend import generate_password, save_password, view_saved_passwords
 
 # Function to simulate loading
 def show_loading_screen():
-    # ... (Same as before)
+    # Create a loading window
+    loading_window = tk.Tk()
+    loading_window.title("Loading")
+    
+    loading_label = tk.Label(loading_window, text="Loading, please wait...", font=("Helvetica", 16))
+    loading_label.pack(pady=20)
+
+    # Simulate loading time
+    for i in range(3):
+        loading_label.config(text=f"Loading{'...' * (i % 3 + 1)}")
+        loading_window.update()
+        time.sleep(1)
+
+    loading_window.destroy()  # Close the loading window
+    show_main_ui()  # Call the main UI function
 
 def show_main_ui():
     main_window = tk.Tk()
