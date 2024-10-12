@@ -9,8 +9,8 @@ def show_loading_screen():
     loading_window = tk.Tk()
     loading_window.title("Loading")
     
-    # Set full screen
-    loading_window.attributes("-fullscreen", True)
+    # Set window size
+    loading_window.geometry("400x300")
     loading_window.configure(bg="#1a1a1a")  # Dark background
 
     logo_image = tk.PhotoImage(file="favicon.png")  # Load your logo here
@@ -38,9 +38,12 @@ def show_main_ui():
     main_window = tk.Tk()
     main_window.title("SelfCrypt")
 
-    # Set full screen
-    main_window.attributes("-fullscreen", True)
-    main_window.configure(bg="#2e2e2e")  # Dark background for main UI
+    # Set window to full screen but in a windowed mode
+    main_window.attributes('-fullscreen', True)  # Full-screen windowed mode
+    main_window.geometry("800x600")  # Set default size (optional)
+
+    # Dark background for main UI
+    main_window.configure(bg="#2e2e2e")  
 
     # Function to generate and save password
     def generate_and_save_password():
@@ -66,35 +69,31 @@ def show_main_ui():
             saved_passwords_window.configure(bg="#2e2e2e")
 
             for url, data in passwords.items():
-                tk.Label(saved_passwords_window, text=f"Website: {url} | Username: {data['username']}", bg="#2e2e2e", fg="#ffffff").pack()
+                tk.Label(saved_passwords_window, text=f"Website: {url} | Username: {data['username']} | Password: {data['password']}", bg="#2e2e2e", fg="#ffffff").pack(pady=5)
         else:
             messagebox.showinfo("No Passwords", "No saved passwords found.")
 
     # UI Components
     tk.Label(main_window, text="Generated Password:", bg="#2e2e2e", fg="#ffffff", font=("Helvetica", 12)).pack(pady=10)
-    password_entry = tk.Entry(main_window, width=50, font=("Helvetica", 12))
-    password_entry.pack(pady=5)
 
-    tk.Label(main_window, text="Username:", bg="#2e2e2e", fg="#ffffff", font=("Helvetica", 12)).pack(pady=10)
-    username_entry = tk.Entry(main_window, width=50, font=("Helvetica", 12))
-    username_entry.pack(pady=5)
+    password_entry = tk.Entry(main_window, width=50, font=("Helvetica", 12), bg="#ffffff", fg="#000000", borderwidth=2, relief="rounded")
+    password_entry.pack(pady=10)
 
-    tk.Label(main_window, text="Website URL:", bg="#2e2e2e", fg="#ffffff", font=("Helvetica", 12)).pack(pady=10)
-    url_entry = tk.Entry(main_window, width=50, font=("Helvetica", 12))
-    url_entry.pack(pady=5)
+    username_entry = tk.Entry(main_window, width=50, font=("Helvetica", 12), bg="#ffffff", fg="#000000", borderwidth=2, relief="rounded")
+    username_entry.pack(pady=10)
+    username_entry.insert(0, "Username")
 
-    # Create a frame for the buttons to enhance layout
-    button_frame = tk.Frame(main_window, bg="#2e2e2e")
-    button_frame.pack(pady=20)
+    url_entry = tk.Entry(main_window, width=50, font=("Helvetica", 12), bg="#ffffff", fg="#000000", borderwidth=2, relief="rounded")
+    url_entry.pack(pady=10)
+    url_entry.insert(0, "Website URL")
 
-    generate_button = tk.Button(button_frame, text="Generate and Save Password", command=generate_and_save_password, bg="#ffffff", fg="#000000", font=("Helvetica", 12))
-    generate_button.pack(side=tk.LEFT, padx=10)
+    generate_button = tk.Button(main_window, text="Generate and Save Password", command=generate_and_save_password, font=("Helvetica", 12), bg="#ffffff", fg="#000000", borderwidth=2, relief="raised")
+    generate_button.pack(pady=20)
 
-    view_button = tk.Button(button_frame, text="View Saved Passwords", command=view_passwords, bg="#ffffff", fg="#000000", font=("Helvetica", 12))
-    view_button.pack(side=tk.LEFT, padx=10)
+    view_button = tk.Button(main_window, text="View Saved Passwords", command=view_passwords, font=("Helvetica", 12), bg="#ffffff", fg="#000000", borderwidth=2, relief="raised")
+    view_button.pack(pady=20)
 
     main_window.mainloop()
 
-# Start the application
-if __name__ == "__main__":
-    show_loading_screen()
+# Show the loading screen when the app starts
+show_loading_screen()
